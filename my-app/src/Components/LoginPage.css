@@ -1,0 +1,21 @@
+.singup-button, .signin-button, .signup-form-button{
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid gray;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 3px 8px;
+    background-color: white;
+    color: black;
+}
+
+.login-page, .signup-page {
+    text-align: center;
+    max-width: 10rem;
+    padding: 2rem;
+    margin: 2rem auto;
+}
+
+.input-password, .input-email, .input-signup-username, .input-signup-email, .input-signup-passwordOne, .input-signup-passwordtwo{
+    margin-bottom: 1rem;
+}
