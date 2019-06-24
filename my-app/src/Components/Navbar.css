@@ -1,0 +1,33 @@
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+    background-color: rgb(162, 91, 168);
+    padding: 10px 10px;
+}
+
+.nav-views li{
+    display: inline-block;
+    list-style: none;
+}
+
+.nav-views__link{
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid gray;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 3px 8px;
+    background-color: white;
+}
+
+.nav-views__link:hover {
+    border: 1px solid black;
+    background-color: rgb(228, 228, 228);
+}
+
+ .logo-link{
+    color: white;
+
+}

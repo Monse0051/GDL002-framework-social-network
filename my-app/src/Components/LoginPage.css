@@ -1,4 +1,4 @@
-.singup-button, .signin-button, .signup-form-button{
+.singup-button, .signin-button, .signup-form-button, .logout-button{
     display: inline-block;
     margin: 5px;
     border: 1px solid gray;
@@ -7,6 +7,10 @@
     padding: 3px 8px;
     background-color: white;
     color: black;
+}
+
+.loginPage-button{
+    display: flex;
 }
 
 .login-page, .signup-page {
@@ -18,4 +22,16 @@
 
 .input-password, .input-email, .input-signup-username, .input-signup-email, .input-signup-passwordOne, .input-signup-passwordtwo{
     margin-bottom: 1rem;
+}
+
+textarea {
+	width: 20rem;
+	height: 10rem;
+	margin-bottom: 1rem;
+	font-size: 1rem;
+	font-family: 'Open Sans', sans-serif;
+	border-radius: .5rem;
+	border: 1px solid #ab1795;
+    padding: 1rem;
+    
 }
