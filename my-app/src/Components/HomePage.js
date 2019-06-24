@@ -19,6 +19,7 @@ class HomePage extends React.Component {
         this.onPost = this.onPost.bind(this);
         this.onChangePost = this.onChangePost.bind(this);
         this.onSetPrivacity = this.onSetPrivacity.bind(this);
+     
     }
 
     componentDidMount(){
@@ -31,7 +32,7 @@ class HomePage extends React.Component {
 
         let postRef = this.database.collection("posts");
         let postQueryRef = postRef.where("public", "==", true);
-        postQueryRef.orderBy("date", "asc");
+        //postQueryRef.orderBy("date", "asc");
 
         let newPostList = [];
 
@@ -42,6 +43,7 @@ class HomePage extends React.Component {
                 console.log("DEBUG_MSG: post: ", post);
                 //let newPostList = this.state.postList;
                 newPostList.push(post);
+                newPostList.reverse();
                 this.setState({postList: newPostList});
             });
         }).catch(error=>{
@@ -51,8 +53,10 @@ class HomePage extends React.Component {
 
     onPost(){
         console.log("posteando...");
+        let user = firebase.auth().currentUser;
+       
         const post = {
-            mail: "test@gmail.com",
+            mail: user.email,
             date: Date.now(),
             message: this.state.postMessage,
             public: this.state.public
@@ -72,6 +76,7 @@ class HomePage extends React.Component {
         console.log(event.target.value);
         this.setState({public: event.target.value === "Public"})
     }
+
 
     render() {
         return (

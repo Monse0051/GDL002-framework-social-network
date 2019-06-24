@@ -23,7 +23,7 @@ class FriendsPage extends React.Component {
 
         let postRef = this.database.collection("posts");
         let postQueryRef = postRef.where("public", "==", false);
-        postQueryRef.orderBy("date", "desc");
+        //postQueryRef.orderBy("date", "desc");
 
         let newPostList = [];
 
@@ -34,6 +34,7 @@ class FriendsPage extends React.Component {
                 console.log("DEBUG_MSG: post: ", post);
                 //let newPostList = this.state.postList;
                 newPostList.push(post);
+                newPostList.reverse();
                 this.setState({postList: newPostList});
             });
         }).catch(error=>{
