@@ -2,7 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 import Navbar from './Navbar';
 import Post from './Post';
-import * as CONFIG from '../Constants/config';
+import {initFirebase, getPosts} from '../Utils/utilities';
 
 class FriendsPage extends React.Component {
     constructor(props){
@@ -14,32 +14,16 @@ class FriendsPage extends React.Component {
     }
 
     componentDidMount(){
-        // if firebase app not initialized, then initialize
-        if (this.firebase.apps.length === 0) {
-            this.firebase.initializeApp(CONFIG.firebaseConfig);
-        }
-        const app = this.firebase.app();
-        this.database = app.firestore();
+        
+        const firebase_db = initFirebase(this.firebase, this.database);
+        this.firebase = firebase_db.firebase;
+        this.database = firebase_db.database;
 
-        let postRef = this.database.collection("posts");
-        let postQueryRef = postRef.where("public", "==", false);
-        //postQueryRef.orderBy("date", "desc");
+        let postsPromise = getPosts(this.firebase, this.database, {argument: "public", cmp: "==", value: false});
+        postsPromise.then(posts => {
+            this.setState({postList:posts});
+        }).catch(error => console.log(error));
 
-        let newPostList = [];
-
-        postQueryRef.get().then(querySnapshoot => {
-            querySnapshoot.forEach(doc => {
-                // adding post to a list
-                let post = doc.data();
-                console.log("DEBUG_MSG: post: ", post);
-                //let newPostList = this.state.postList;
-                newPostList.push(post);
-                newPostList.reverse();
-                this.setState({postList: newPostList});
-            });
-        }).catch(error=>{
-            console.error(error);
-        });
     }
 
 
@@ -60,6 +44,7 @@ class FriendsPage extends React.Component {
                                 date={post.date}
                                 msg={post.message}
                                 public={post.public}
+                                likes ={post.likes}
                             />;
                         })}
                     </ul>

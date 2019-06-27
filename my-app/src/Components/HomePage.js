@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
-import * as CONFIG from '../Constants/config';
+import {initFirebase, getPosts} from '../Utils/utilities';
 import Navbar from '../Components/Navbar';
 import Post from './Post';
 
@@ -13,59 +13,44 @@ class HomePage extends React.Component {
         this.state = {
             postList: [],
             postMessage: "",
-            public: false
+            public: false,
         };
 
         this.onPost = this.onPost.bind(this);
         this.onChangePost = this.onChangePost.bind(this);
         this.onSetPrivacity = this.onSetPrivacity.bind(this);
-     
+        
     }
 
     componentDidMount(){
-        // if firebase app not initialized, then initialize
-        if (this.firebase.apps.length === 0) {
-            this.firebase.initializeApp(CONFIG.firebaseConfig);
-        }
-        const app = this.firebase.app();
-        this.database = app.firestore();
+        const firebase_db = initFirebase(this.firebase, this.database);
+        this.firebase = firebase_db.firebase;
+        this.database = firebase_db.database;
 
-        let postRef = this.database.collection("posts");
-        let postQueryRef = postRef.where("public", "==", true);
-        //postQueryRef.orderBy("date", "asc");
-
-        let newPostList = [];
-
-        postQueryRef.get().then(querySnapshoot => {
-            querySnapshoot.forEach(doc => {
-                // adding post to a list
-                let post = doc.data();
-                console.log("DEBUG_MSG: post: ", post);
-                //let newPostList = this.state.postList;
-                newPostList.push(post);
-                newPostList.reverse();
-                this.setState({postList: newPostList});
-            });
-        }).catch(error=>{
-            console.error(error);
-        });
+        let postsPromise = getPosts(this.firebase, this.database, {argument: "public", cmp: "==", value: true});
+        postsPromise.then(posts => {
+            this.setState({postList:posts});
+        }).catch(error => console.log(error));
     }
 
     onPost(){
         console.log("posteando...");
         let user = firebase.auth().currentUser;
-       
+        const today = Date.now();
         const post = {
             mail: user.email,
-            date: Date.now(),
+            date: today,
             message: this.state.postMessage,
-            public: this.state.public
+            public: this.state.public,
+            likes: 0
         }
-        this.database.collection("posts").doc(Date.now().toString()).set(post);
+        this.database.collection("posts").doc(today.toString()).set(post);
         let newPostList = this.state.postList;
-        newPostList.push(post);
+        newPostList.unshift(post);
+
+        this.setState({postList: newPostList});
         //TODO: erase post after press button post
-        //FIXME: new post should be showed after press button post
+       
     }
 
     onChangePost(event) {
@@ -77,7 +62,7 @@ class HomePage extends React.Component {
         this.setState({public: event.target.value === "Public"})
     }
 
-
+   
     render() {
         return (
             <div>
@@ -101,9 +86,12 @@ class HomePage extends React.Component {
                                 date={post.date}
                                 msg={post.message}
                                 public={post.public}
+                                likes ={post.likes}
+                                isEditable = {false}
                             />;
                         })}
                     </ul>
+                    
                 </div>
             </div>
         );
