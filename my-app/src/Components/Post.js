@@ -10,8 +10,10 @@ class Post extends React.Component{
         this.firebase = firebase;
         this.database = null;
         this.state = {likeCounter:this.props.likes}; 
+       
 
-        this.onClickHandler= this.onClickHandler.bind(this);    
+        this.onClickHandler= this.onClickHandler.bind(this);
+        this.onDelete= this.onDelete.bind(this);    
             
     }
 
@@ -24,6 +26,13 @@ class Post extends React.Component{
 
     onDelete(){
         console.log("DEBUG_MSG: deleting...")
+        this.database.collection("posts").doc(this.props.date.toString()).delete()
+
+        //  this.setState((state)=> {
+        //     return {deletState: state.message }
+      
+        //  });
+        this.props.deleteFunc(this.props.date);
     }
 
     onClickHandler(){
@@ -34,14 +43,21 @@ class Post extends React.Component{
             date: this.props.date,
             message: this.props.msg,
             public: this.props.public,
-            likes: this.props.likes + 1
+            likes: this.state.likeCounter + 1
         }
         
-        this.setState((state)=> {
-            return {likeCounter: state.likeCounter+1}
-        });
-        this.database.collection("posts").doc(this.props.date.toString()).set(post);
+        
+        this.database.collection("posts").doc(this.props.date.toString()).set(post)
+     //   .then(()=>{
+            console.log('then')
+            this.setState((state)=> {
+                return {likeCounter: state.likeCounter+1}
+          
+     //   });
+
+        }) 
            
+  
     }
 
     render() {

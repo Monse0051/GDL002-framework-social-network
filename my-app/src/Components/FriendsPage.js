@@ -19,6 +19,8 @@ class FriendsPage extends React.Component {
         this.firebase = firebase_db.firebase;
         this.database = firebase_db.database;
 
+        console.log(this.firebase.auth().currentUser);
+
         let postsPromise = getPosts(this.firebase, this.database, {argument: "public", cmp: "==", value: false});
         postsPromise.then(posts => {
             this.setState({postList:posts});

@@ -11,18 +11,24 @@ class  MyAccountPage extends React.Component {
         this.firebase = firebase;
         this.database = null;
 
-        this.state = {postList:[]};
+        this.state = {postList:[],
+                      user: null };
+        this.onDelete = this.onDelete.bind(this);
+
+
+        // firebase.auth().onAuthStateChanged((user) => {
+        //     this.setState({ user: user });
+        //   });
     }
 
-    componentDidMount(){
-        
+    componentDidMount(){  
         const firebase_db = initFirebase(this.firebase, this.database);
         this.firebase = firebase_db.firebase;
         this.database = firebase_db.database;
 
         const mail = this.firebase.auth().currentUser.email;
 
-        //FIXME crahs when refresh 2 times
+        //FIXME crashes when refresh 2 times
 
         let postsPromise = getPosts(this.firebase, 
             this.database, 
@@ -34,6 +40,16 @@ class  MyAccountPage extends React.Component {
 
     }
 
+    onDelete(id){
+        let newPostList = this.state.postList;
+        let index= newPostList.findIndex((elemen)=>{
+            return id === elemen.date;
+        });
+        // Deletes elemen at position index
+        newPostList.splice(index,1);
+        this.setState({postList: newPostList});
+
+    }
 
     render() {
         return (
@@ -54,6 +70,8 @@ class  MyAccountPage extends React.Component {
                                 public={post.public}
                                 likes ={post.likes}
                                 isEditable = {true}
+                                deleteFunc = {this.onDelete}
+                                key = {post.date}
                             />;
                         })}
                     </ul>

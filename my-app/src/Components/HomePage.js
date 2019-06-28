@@ -45,12 +45,13 @@ class HomePage extends React.Component {
             likes: 0
         }
         this.database.collection("posts").doc(today.toString()).set(post);
-        let newPostList = this.state.postList;
-        newPostList.unshift(post);
-
-        this.setState({postList: newPostList});
-        //TODO: erase post after press button post
-       
+        
+        if (post.public) {
+            let newPostList = this.state.postList;
+            newPostList.unshift(post);
+            this.setState({ postList: newPostList });
+        }
+        //TODO: erase post after press button post      
     }
 
     onChangePost(event) {
@@ -88,6 +89,7 @@ class HomePage extends React.Component {
                                 public={post.public}
                                 likes ={post.likes}
                                 isEditable = {false}
+                                key={post.date}
                             />;
                         })}
                     </ul>
