@@ -1,4 +1,4 @@
-.singup-button, .signin-button, .signup-form-button, .logout-button{
+.singup-button, .signin-button, .signup-form-button, .logout-button, .button{
     display: inline-block;
     margin: 5px;
     border: 1px solid gray;
@@ -6,7 +6,7 @@
     border-radius: 5px;
     padding: 3px 8px;
     background-color: white;
-    color: black;
+    color:rgb(162, 91, 168);
 }
 
 .loginPage-button{

@@ -9,12 +9,15 @@ class Post extends React.Component{
         super(props);
         this.firebase = firebase;
         this.database = null;
-        this.state = {likeCounter:this.props.likes}; 
+        this.newMessage = "";
+        this.state = {likeCounter:this.props.likes, 
+                        isDisabled:true};
        
-
-        this.onClickHandler= this.onClickHandler.bind(this);
-        this.onDelete= this.onDelete.bind(this);    
-            
+        this.onClickLike = this.onClickLike.bind(this);
+        this.onDelete = this.onDelete.bind(this);  
+        this.onEdit= this.onEdit.bind(this);
+        this.onSave = this.onSave.bind(this);  
+        this.onChangePost = this.onChangePost.bind(this);    
     }
 
     componentDidMount(){
@@ -26,16 +29,12 @@ class Post extends React.Component{
 
     onDelete(){
         console.log("DEBUG_MSG: deleting...")
-        this.database.collection("posts").doc(this.props.date.toString()).delete()
-
-        //  this.setState((state)=> {
-        //     return {deletState: state.message }
-      
-        //  });
+        alert("are you sure?");
+        this.database.collection("posts").doc(this.props.date.toString()).delete();
         this.props.deleteFunc(this.props.date);
     }
 
-    onClickHandler(){
+    onClickLike(){
         console.log("posteando...");
        
         const post = {
@@ -48,35 +47,65 @@ class Post extends React.Component{
         
         
         this.database.collection("posts").doc(this.props.date.toString()).set(post)
-     //   .then(()=>{
             console.log('then')
             this.setState((state)=> {
-                return {likeCounter: state.likeCounter+1}
-          
-     //   });
+                return {likeCounter: state.likeCounter+1};
 
-        }) 
+            }); 
            
-  
+    }
+
+    onEdit(){
+        console.log("editando...")
+       this.setState({isDisabled: false});
+    }
+
+    onSave (){
+    
+        const post = {
+            mail: this.props.mail,
+            date: this.props.date,
+            message: this.newMessage,
+            public: this.props.public,
+            likes: this.state.likeCounter 
+        }
+        
+        this.database.collection("posts").doc(this.props.date.toString()).set(post);
+               
+        this.setState({isDisabled: true});
+    }
+
+    onChangePost(event){
+        this.newMessage= event.target.value;
     }
 
     render() {
         let date = new Date(this.props.date).toDateString();
-
         let deleteBtn;
-
-        if (this.props.isEditable) {
-            deleteBtn = <button onClick={this.onDelete}>delete</button>;
+        let editBtn;
+        if (this.props.isEditable ) {
+            deleteBtn = <button className = "button" onClick={this.onDelete}><ion-icon name="trash"></ion-icon></button>;
+            
+            if(this.state.isDisabled){
+                editBtn = <button className = "button" onClick={this.onEdit}><ion-icon name="create"></ion-icon></button> 
+            }
+            else{
+                editBtn = <button className = "button" onClick={this.onSave}><ion-icon name="save"></ion-icon></button>;
+            }
         }
+        
 
         return (
             <div>
                 <p>{this.props.mail}</p>
                 <p>{date}</p>
-                <p>{this.props.msg}</p>
+                <p><textarea rows="4" cols="50" onChange={this.onChangePost} defaultValue={this.props.msg} disabled={this.state.isDisabled}>
+                    </textarea>
+                </p>
                 <p>{this.state.likeCounter}</p>
-                <button onClick={this.onClickHandler}> <ion-icon name="heart"></ion-icon></button>
+                <button className = "button" onClick={this.onClickLike}> <ion-icon name="heart"></ion-icon></button>
                 {deleteBtn}
+                {editBtn}
                 <br/>
             </div>
         );
