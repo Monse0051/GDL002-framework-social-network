@@ -20,7 +20,9 @@ nav {
     border-radius: 5px;
     padding: 3px 8px;
     background-color: white;
+    max-width:25px;
 }
+
 
 .nav-views__link:hover {
     border: 1px solid black;

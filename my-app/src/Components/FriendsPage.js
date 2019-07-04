@@ -47,6 +47,7 @@ class FriendsPage extends React.Component {
                                 msg={post.message}
                                 public={post.public}
                                 likes ={post.likes}
+                                key = {post.date}
                             />;
                         })}
                     </ul>

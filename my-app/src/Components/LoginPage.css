@@ -1,6 +1,9 @@
 .singup-button, .signin-button, .signup-form-button, .logout-button, .button{
     display: inline-block;
     margin: 5px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    
     border: 1px solid gray;
     text-decoration: none;
     border-radius: 5px;
@@ -14,15 +17,36 @@
 }
 
 .login-page, .signup-page {
-    text-align: center;
-    max-width: 10rem;
-    padding: 2rem;
-    margin: 2rem auto;
+   
+    /* max-width: 10rem; */
+    /* padding: 2rem; */
+    margin: 5rem auto;
+    
+        -webkit-border-radius: 10px 10px 10px 10px;
+        border-radius: 10px 10px 10px 10px;
+        background:rgb(211, 160, 216);
+        padding: 30px;
+        width: 90%;
+        max-width: 20rem;
+        max-height: 35rem;
+        position: relative;
+        padding: 0px;
+        -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+        box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+        text-align: center;
+      
+      
 }
 
 .input-password, .input-email, .input-signup-username, .input-signup-email, .input-signup-passwordOne, .input-signup-passwordtwo{
+    margin-top: 2rem;
     margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-left: 2rem;
+    border-radius: 2px;
+    max-width: 20rem;
 }
+
 
 textarea {
 	width: 20rem;
@@ -33,5 +57,6 @@ textarea {
 	border-radius: .5rem;
 	border: 1px solid #ab1795;
     padding: 1rem;
+   
     
 }

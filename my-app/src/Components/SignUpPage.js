@@ -95,7 +95,7 @@ const INITIAL_STATE = {
                 onChange={this.onChange}
                 type="password"
                 placeholder="Confirm Password"
-              />
+              /> <br></br>
               <button className = "signup-form-button" disabled={isInvalid} type="submit">
                 Sign Up
               </button>

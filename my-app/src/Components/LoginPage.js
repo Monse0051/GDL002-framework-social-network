@@ -60,7 +60,7 @@ class LoginPage extends React.Component {
                 onChange={this.onChange}
                 type="password"
                 placeholder="Password"
-              /> 
+              /> <br></br>
               <button className = "signin-button" disabled={isInvalid} type="submit">
                 Sign In
             </button>

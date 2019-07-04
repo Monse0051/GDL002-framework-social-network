@@ -15,10 +15,6 @@ class  MyAccountPage extends React.Component {
                       user: null };
         this.onDelete = this.onDelete.bind(this);
 
-
-        // firebase.auth().onAuthStateChanged((user) => {
-        //     this.setState({ user: user });
-        //   });
     }
 
     componentDidMount(){  
@@ -26,17 +22,20 @@ class  MyAccountPage extends React.Component {
         this.firebase = firebase_db.firebase;
         this.database = firebase_db.database;
 
-        const mail = this.firebase.auth().currentUser.email;
+        
 
-        //FIXME crashes when refresh 2 times
-
-        let postsPromise = getPosts(this.firebase, 
-            this.database, 
-            {argument: "mail", cmp: "==", value: mail});
-
-        postsPromise.then(posts => {
-            this.setState({postList:posts});
-        }).catch(error => console.log(error));
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user){
+                this.setState({ user: user });
+                let postsPromise = getPosts(this.firebase, 
+                    this.database, 
+                    {argument: "mail", cmp: "==", value: this.state.user.email});
+        
+                postsPromise.then(posts => {
+                    this.setState({postList:posts});
+                }).catch(error => console.log(error));
+            }
+        });
 
     }
 

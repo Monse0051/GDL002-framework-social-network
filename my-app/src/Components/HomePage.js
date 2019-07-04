@@ -51,7 +51,7 @@ class HomePage extends React.Component {
             newPostList.unshift(post);
             this.setState({ postList: newPostList });
         }
-        //TODO: erase post after press button post      
+        this.setState({postMessage:""}); 
     }
 
     onChangePost(event) {
@@ -72,7 +72,7 @@ class HomePage extends React.Component {
                 </div>
                 <div>
                     <h1>Welcome to the Home Page</h1>
-                    <textarea rows="4" cols="50" onChange={this.onChangePost}> </textarea><br></br>
+                    <textarea rows="4" cols="50" onChange={this.onChangePost} value= {this.state.postMessage}/> <br></br>
                     <input type="radio" name="privacity" value="Public" 
                         onChange={this.onSetPrivacity}/>Public
                     <input type="radio" name="privacity" value="Friends"
