@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Muli|Poppins&display=swap');
+body{
+    font-family: 'Muli', sans-serif;
+    text-align: center;
+}
 .singup-button, .signin-button, .signup-form-button, .logout-button, .button{
     display: inline-block;
     margin: 5px;
     margin-bottom: 1rem;
     margin-top: 1rem;
-    
     border: 1px solid gray;
     text-decoration: none;
     border-radius: 5px;
@@ -16,26 +20,20 @@
     display: flex;
 }
 
-.login-page, .signup-page {
-   
-    /* max-width: 10rem; */
-    /* padding: 2rem; */
+ .signup-page {
+
     margin: 5rem auto;
-    
-        -webkit-border-radius: 10px 10px 10px 10px;
-        border-radius: 10px 10px 10px 10px;
-        background:rgb(211, 160, 216);
-        padding: 30px;
-        width: 90%;
-        max-width: 20rem;
-        max-height: 35rem;
-        position: relative;
-        padding: 0px;
-        -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-        box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-        text-align: center;
-      
-      
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background:rgb(211, 160, 216);
+    padding: 30px;
+    width: 95%;
+    max-width: 20rem;
+    max-height: 35rem;
+    position: relative;
+    padding: 0px;
+    text-align: center;
+         
 }
 
 .input-password, .input-email, .input-signup-username, .input-signup-email, .input-signup-passwordOne, .input-signup-passwordtwo{
@@ -49,14 +47,136 @@
 
 
 textarea {
-	width: 20rem;
+    margin-top: 1rem;
+    width: 20rem;
 	height: 10rem;
 	margin-bottom: 1rem;
 	font-size: 1rem;
-	font-family: 'Open Sans', sans-serif;
 	border-radius: .5rem;
 	border: 1px solid #ab1795;
     padding: 1rem;
-   
+    background-color: white;
+    font-family: 'Muli', sans-serif;
     
 }
+.conteiner{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 500px 900px;
+    justify-content: space-between; 
+    /* add your code above this line */
+}
+.login-page{
+    display:flex;
+    margin: 5rem auto;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background:rgb(211, 160, 216);
+    padding: 30px;
+    height: 50vh;
+    width: 25vw; 
+    position: relative;
+    padding: 0px;
+    text-align: center;
+    
+}
+
+
+.introduction-section {
+  height: 50vh;
+  width: 30vw; 
+  margin-left: 50%;
+  margin-right: 8%;
+  margin-top: 10%;
+  font-size: 20px;
+  text-align: justify;
+
+}
+
+h1{
+    font-size: 35px;
+    font-family: 'Poppins', sans-serif;
+    color: purple;
+}
+
+
+@media screen and (max-width: 1024px){
+    .login-page{
+        display:flex;
+        -webkit-border-radius: 10px 10px 10px 10px;
+        border-radius: 10px 10px 10px 10px;
+        background:rgb(211, 160, 216);
+        padding: 30px;
+        height: 30vh;
+        width: 35vw; 
+        position: relative;
+        padding: 0px;
+        text-align: center;
+        margin-top: 1%;
+        
+    }
+
+    .introduction-section {
+      height: 25vh;
+      width: 60vw; 
+      margin-left: 20%;
+      margin-right: 5%;
+      margin-top: 1%;
+      font-size: 20px;
+      text-align: justify;
+    
+    }  
+    .conteiner{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 400px 900px;
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width: 480px){
+    textarea {
+        margin: 5rem auto;
+        width: 15rem;
+        height: 10rem;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        border-radius: .5rem;
+        border: 1px solid #ab1795;
+        padding: 1rem;  
+    }
+    .conteiner{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 500px 900px;
+        display: flex;
+        flex-direction: column;
+    }
+    .login-page{
+        display:flex;
+        margin: 5rem auto;
+        -webkit-border-radius: 10px 10px 10px 10px;
+        border-radius: 10px 10px 10px 10px;
+        background:rgb(211, 160, 216);
+        padding: 30px;
+        height: 60vh;
+        width: 70vw; 
+        position: relative;
+        padding: 0px;
+        text-align: center;
+        
+    }
+    
+    .introduction-section {
+      height: 50vh;
+      width: 60vw; 
+      margin-left: 20%;
+      margin-right: 8%;
+      margin-top: 10%;
+      font-size: 20px;
+      text-align: justify;
+    
+    }
+}  

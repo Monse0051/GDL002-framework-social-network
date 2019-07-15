@@ -67,11 +67,9 @@ class HomePage extends React.Component {
     render() {
         return (
             <div>
+                <Navbar></Navbar>              
                 <div>
-                    <Navbar></Navbar>
-                </div>
-                <div>
-                    <h1>Welcome to the Home Page</h1>
+                    <h1>Welcome to Home Page</h1>
                     <textarea rows="4" cols="50" onChange={this.onChangePost} value= {this.state.postMessage}/> <br></br>
                     <input type="radio" name="privacity" value="Public" 
                         onChange={this.onSetPrivacity}/>Public

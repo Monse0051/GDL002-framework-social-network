@@ -5,6 +5,7 @@ nav {
     border-bottom: 1px solid grey;
     background-color: rgb(162, 91, 168);
     padding: 10px 10px;
+    max-width: 100%;
 }
 
 .nav-views li{
@@ -31,5 +32,18 @@ nav {
 
  .logo-link{
     color: white;
+    font-family: 'Poppins', sans-serif;
 
+
+}
+@media (max-width: 400px){
+    nav {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid grey;
+        background-color: rgb(162, 91, 168);
+        padding: 10px 10px;
+        max-width: 100%;
+    }
+    
 }

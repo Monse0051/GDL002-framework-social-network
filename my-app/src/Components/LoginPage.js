@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 import * as ROUTES from '../Constants/routes';
 import {Link} from "react-router-dom";
+import Introduction from '../Components/IntroductionLoginPage';
 
 const INITIAL_STATE = {
     email: '',
@@ -44,6 +45,10 @@ class LoginPage extends React.Component {
         const isInvalid = password === '' || email === '';
     
       return (
+        <div className = "conteiner">
+        <div className = "introduction-section">
+        <Introduction></Introduction>
+        </div>
         <div className="login-page">
           <div className="login-section">
             <form onSubmit={this.onSubmit} >
@@ -67,11 +72,10 @@ class LoginPage extends React.Component {
 
               {error && <p>{error.message}</p>}
             </form>
-          </div>
-          <div className="signup-section">
-              <p>Don't you have an account?</p> 
+            <p>Don't you have an account?</p> 
               <Link className="singup-button" to={ROUTES.SIGN_UP}>Sign up</Link>
-          </div>
+          </div>     
+        </div>
         </div>
       );
     }

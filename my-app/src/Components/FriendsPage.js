@@ -36,7 +36,7 @@ class FriendsPage extends React.Component {
                     <Navbar></Navbar>
                 </div>
                 <div>
-                    <h1>Welcome to the FriendsPage</h1>
+                    <h1>Welcome to Friends Page</h1>
                 </div>
                 <div className="post-section">
                     <ul>
